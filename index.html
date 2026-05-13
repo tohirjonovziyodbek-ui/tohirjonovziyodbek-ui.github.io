@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toxirjonov Ziyodbek — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0F;
+  --bg2: #111118;
+  --card: #16161F;
+  --border: rgba(255,255,255,0.07);
+  --accent: #6EE7B7;
+  --accent2: #38BDF8;
+  --accent3: #F472B6;
+  --text: #F0F0F5;
+  --muted: #7A7A90;
+  --glow: rgba(110,231,183,0.15);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* CURSOR GLOW */
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(110,231,183,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+  z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10,10,15,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(110,231,183,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110,231,183,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(110,231,183,0.08);
+  border: 1px solid rgba(110,231,183,0.2);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 32px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.hero h1 .name-highlight {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.role-badge {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.role-badge.green { background: rgba(110,231,183,0.08); border-color: rgba(110,231,183,0.25); color: var(--accent); }
+.role-badge.blue { background: rgba(56,189,248,0.08); border-color: rgba(56,189,248,0.25); color: var(--accent2); }
+.role-badge.pink { background: rgba(244,114,182,0.08); border-color: rgba(244,114,182,0.25); color: var(--accent3); }
+
+.hero-desc {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #0A0A0F;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(110,231,183,0.3);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--text);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.04);
+}
+
+/* STATS */
+.stats-bar {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 60px;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* SECTION */
+section {
+  padding: 100px 60px;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 500px;
+  margin-bottom: 60px;
+}
+
+/* SKILLS */
+.skills-section {
+  background: var(--bg2);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card:hover {
+  border-color: rgba(110,231,183,0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.skill-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.skill-icon.teal { background: rgba(110,231,183,0.1); }
+.skill-icon.blue { background: rgba(56,189,248,0.1); }
+.skill-icon.pink { background: rgba(244,114,182,0.1); }
+.skill-icon.orange { background: rgba(251,146,60,0.1); }
+
+.skill-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.skill-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tag {
+  padding: 3px 10px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.project-card:hover {
+  border-color: rgba(110,231,183,0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+.project-img {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-img.bmi {
+  background: linear-gradient(135deg, #0F4C3A 0%, #1A7A5E 100%);
+}
+
+.project-img.article {
+  background: linear-gradient(135deg, #1A1A4E 0%, #2D2D8F 100%);
+}
+
+.project-img.portfolio {
+  background: linear-gradient(135deg, #3A1A2E 0%, #7A2D5E 100%);
+}
+
+.project-img.dgu {
+  background: linear-gradient(135deg, #1A3A1A 0%, #2D7A2D 100%);
+}
+
+.dgu-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(110,231,183,0.15);
+  border: 1px solid rgba(110,231,183,0.4);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+
+.project-body {
+  padding: 24px;
+}
+
+.project-type {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.project-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.project-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.tech-tag {
+  padding: 4px 12px;
+  background: rgba(110,231,183,0.08);
+  border: 1px solid rgba(110,231,183,0.15);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+/* CERTS */
+.certs-section {
+  background: var(--bg2);
+}
+
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.cert-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: all 0.3s;
+}
+
+.cert-card:hover {
+  border-color: rgba(56,189,248,0.25);
+  transform: translateY(-3px);
+}
+
+.cert-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 8px;
+  background: rgba(56,189,248,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.cert-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.cert-org {
+  font-size: 13px;
+  color: var(--accent2);
+  margin-bottom: 4px;
+}
+
+.cert-year {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-avatar {
+  width: 280px;
+  height: 280px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--card), #1E1E2E);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 80px;
+  font-weight: 800;
+  color: var(--accent);
+  position: relative;
+}
+
+.about-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(110,231,183,0.3), rgba(56,189,248,0.1), transparent);
+  z-index: -1;
+}
+
+.about-text h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.about-text p {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.about-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.info-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.info-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.info-val {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* CONTACT */
+.contact-section {
+  background: var(--bg2);
+  text-align: center;
+}
+
+.contact-section .section-title,
+.contact-section .section-label,
+.contact-section .section-sub {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.contact-cards {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s;
+  min-width: 220px;
+}
+
+.contact-card:hover {
+  border-color: rgba(110,231,183,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.contact-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.contact-card-icon.tg { background: rgba(56,189,248,0.1); }
+.contact-card-icon.email { background: rgba(110,231,183,0.1); }
+.contact-card-icon.phone { background: rgba(244,114,182,0.1); }
+
+.contact-card-info { text-align: left; }
+.contact-card-type { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+.contact-card-val { font-size: 15px; font-weight: 500; }
+
+/* FOOTER */
+footer {
+  padding: 32px 60px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.footer-text span { color: var(--accent); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  section { padding: 60px 24px; }
+  .stats-bar { padding: 24px; gap: 32px; flex-wrap: wrap; }
+  .about-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ZT.</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Ko'nikmalar</a></li>
+    <li><a href="#projects">Loyihalar</a></li>
+    <li><a href="#certs">Sertifikatlar</a></li>
+    <li><a href="#about">Haqimda</a></li>
+    <li><a href="#contact">Bog'lanish</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+
+    <h1>
+      Salom, men<br>
+      <span class="name-highlight">Ziyodbek</span>
+    </h1>
+    <div class="hero-roles">
+      <span class="role-badge green">Flutter Developer</span>
+      <span class="role-badge blue">Mobile App Developer</span>
+      <span class="role-badge pink">IT Specialist</span>
+      <span class="role-badge green">UI/UX Designer</span>
+      <span class="role-badge blue">Problem Solver</span>
+      <span class="role-badge pink">Tech Enthusiast</span>
+    </div>
+    <p class="hero-desc">
+      Flutter va Dart yordamida zamonaviy mobil ilovalar yarataman.
+      Foydalanuvchi tajribasini yaxshilash va muammolarni texnologiya orqali hal etish mening asosiy yo'nalishim.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">
+        <span>Loyihalarni ko'rish</span>
+        <span>→</span>
+      </a>
+      <a href="#contact" class="btn-secondary">
+        <span>Bog'lanish</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar fade-up">
+  <div class="stat-item">
+    <div class="stat-num">6+</div>
+    <div class="stat-label">Loyihalar</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">7</div>
+    <div class="stat-label">DGU Guvohnoma</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">Sertifikatlar</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5+</div>
+    <div class="stat-label">Texnologiyalar</div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-label fade-up">Nima bilaman</div>
+  <h2 class="section-title fade-up">Ko'nikmalar & Texnologiyalar</h2>
+  <p class="section-sub fade-up">Mobil ilovalardan tortib IT infratuzilmasigacha — bu texnologiyalarda ishlayman.</p>
+
+  <div class="skills-grid">
+    <div class="skill-card fade-up">
+      <div class="skill-icon teal">📱</div>
+      <div class="skill-name">Flutter & Dart</div>
+      <div class="skill-desc">Cross-platform mobil ilovalar yaratish. Android va iOS uchun bitta kod bazasi.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Flutter</span>
+        <span class="skill-tag">Dart</span>
+        <span class="skill-tag">Widgets</span>
+        <span class="skill-tag">State Management</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon blue">🗄️</div>
+      <div class="skill-name">Ma'lumotlar bazasi</div>
+      <div class="skill-desc">Mahalliy va bulutli ma'lumotlarni saqlash va boshqarish texnologiyalari.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SQLite</span>
+        <span class="skill-tag">Firebase</span>
+        <span class="skill-tag">Hive</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon pink">🎨</div>
+      <div class="skill-name">UI/UX Dizayn</div>
+      <div class="skill-desc">Foydalanuvchi uchun qulay va chiroyli interfeyslar loyihalash.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Material Design</span>
+        <span class="skill-tag">Prototyping</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon orange">🔧</div>
+      <div class="skill-name">IT Support</div>
+      <div class="skill-desc">Kompyuter tizimlarini sozlash, muammolarni bartaraf etish va qo'llab-quvvatlash.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Hardware</span>
+        <span class="skill-tag">Networking</span>
+        <span class="skill-tag">Troubleshooting</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon teal">🚀</div>
+      <div class="skill-name">Versiya boshqaruvi</div>
+      <div class="skill-desc">Jamoaviy loyihalarda kod boshqarish va hamkorlik qilish.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon blue">💡</div>
+      <div class="skill-name">Problem Solving</div>
+      <div class="skill-desc">Murakkab muammolarni tahlil qilish va samarali yechimlar topish.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Algorithmic Thinking</span>
+        <span class="skill-tag">Debugging</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label fade-up">Nima qildim</div>
+  <h2 class="section-title fade-up">Loyihalar</h2>
+  <p class="section-sub fade-up">Real muammolarni hal etish uchun yaratilgan loyihalar.</p>
+
+  <div class="projects-grid">
+    <div class="project-card fade-up">
+      <div class="project-img bmi">⚖️</div>
+      <div class="project-body">
+        <div class="project-type">Mobil Ilova</div>
+        <div class="project-name">BMI Calculator</div>
+        <div class="project-desc">Tana massasi indeksini hisoblash va kuzatish uchun Flutter ilovasi. Foydalanuvchi sog'lig'ini monitoring qilish imkoniyati.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+          <span class="tech-tag">Hive</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-img article">📄</div>
+      <div class="project-body">
+        <div class="project-type">Ilmiy Maqola</div>
+        <div class="project-name">Ilmiy Tadqiqot</div>
+        <div class="project-desc">IT sohasidagi zamonaviy tendensiyalar va texnologiyalarni o'rganuvchi ilmiy maqola nashr etildi.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Research</span>
+          <span class="tech-tag">Academic</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-img portfolio">🌐</div>
+      <div class="project-body">
+        <div class="project-type">Vazifa Menejeri</div>
+        <div class="project-name">Task Manager App</div>
+        <div class="project-desc">Kunlik vazifalarni boshqarish, muddatlarni kuzatish va bildirishnomalar bilan ta'minlangan Flutter ilovasi.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Hive</span>
+          <span class="tech-tag">Notifications</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-img" style="background:linear-gradient(135deg,#1A3A1A,#2D7A2D);position:relative;">
+        🐍
+      </div>
+      <div class="project-body">
+        <div class="project-type">Python Dastur</div>
+        <div class="project-name">Ekran yozish dasturi</div>
+        <div class="project-desc">Python dasturlash tili yordamida ekran yozish (screen recorder) dasturi yaratilgan.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Screen Recorder</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-img" style="background:linear-gradient(135deg,#1A2A3A,#2D5A7A);position:relative;">
+        🌡️
+      </div>
+      <div class="project-body">
+        <div class="project-type">IoT Dastur</div>
+        <div class="project-name">Issiq suv haroratini nazorat qilish</div>
+        <div class="project-desc">Maishiy ehtiyojlar uchun tayyorlanadigan issiq suv haroratini nazorat qiluvchi dasturiy mahsulot.</div>
+        <div class="project-tech">
+          <span class="tech-tag">IoT</span>
+          <span class="tech-tag">Nazorat tizimi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DGU GUVOHNOMALAR -->
+  <div style="margin-top:60px;">
+    <div class="section-label fade-up">Davlat tomonidan tasdiqlangan</div>
+    <h3 class="fade-up" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:12px;">Mualliflik Guvohnomalari</h3>
+    <p class="fade-up" style="color:var(--muted);margin-bottom:40px;">O'zbekiston Respublikasi Adliya Vazirligi tomonidan rasmiy ro'yxatdan o'tkazilgan dasturlar.</p>
+    <div class="certs-grid">
+
+      <div class="cert-card fade-up">
+        <div class="cert-icon" style="background:rgba(110,231,183,0.1);">🏛️</div>
+        <div>
+          <div class="cert-name">Binar qidiruv asoslari</div>
+          <div class="cert-org">№ DGU 39175</div>
+          <div class="cert-year">Adliya Vazirligi</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-up">
+        <div class="cert-icon" style="background:rgba(110,231,183,0.1);">🏛️</div>
+        <div>
+          <div class="cert-name">Issiq suv haroratini nazorat qilish</div>
+          <div class="cert-org">№ DGU 40679</div>
+          <div class="cert-year">Adliya Vazirligi</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-up">
+        <div class="cert-icon" style="background:rgba(110,231,183,0.1);">🏛️</div>
+        <div>
+          <div class="cert-name">AIEducate English — ingliz tili dasturi</div>
+          <div class="cert-org">№ DGU 41427</div>
+          <div class="cert-year">Adliya Vazirligi</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-up">
+        <div class="cert-icon" style="background:rgba(110,231,183,0.1);">🏛️</div>
+        <div>
+          <div class="cert-name">Mathematical Solvers — Tenglama yechuvchi</div>
+          <div class="cert-org">№ DGU 43411</div>
+          <div class="cert-year">Adliya Vazirligi</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-up">
+        <div class="cert-icon" style="background:rgba(110,231,183,0.1);">🏛️</div>
+        <div>
+          <div class="cert-name">Hisoblash eksperimentlarini tashkil etish</div>
+          <div class="cert-org">№ DGU 44068</div>
+          <div class="cert-year">Adliya Vazirligi</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-up">
+        <div class="cert-icon" style="background:rgba(110,231,183,0.1);">🏛️</div>
+        <div>
+          <div class="cert-name">Elektron tijorat saralash dasturi</div>
+          <div class="cert-org">№ DGU 44889</div>
+          <div class="cert-year">Adliya Vazirligi</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-up">
+        <div class="cert-icon" style="background:rgba(110,231,183,0.1);">🏛️</div>
+        <div>
+          <div class="cert-name">Fakultet tyutorlari faoliyatini avtomatlashtirish</div>
+          <div class="cert-org">№ DGU 44892</div>
+          <div class="cert-year">Adliya Vazirligi</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</section>
+
+<!-- CERTS -->
+<section class="certs-section" id="certs">
+  <div class="section-label fade-up">Tasdiqlanganlar</div>
+  <h2 class="section-title fade-up">Sertifikatlar</h2>
+  <p class="section-sub fade-up">Xalqaro platforma va tashkilotlardan olingan sertifikatlar.</p>
+
+  <div class="certs-grid">
+    <div class="cert-card fade-up">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">IT Support Professional</div>
+        <div class="cert-org">IBM — Coursera</div>
+        <div class="cert-year">2024</div>
+      </div>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Flutter Development</div>
+        <div class="cert-org">Coursera</div>
+        <div class="cert-year">2024</div>
+      </div>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Mobile App Development</div>
+        <div class="cert-org">Coursera</div>
+        <div class="cert-year">2024</div>
+      </div>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Technical Support Fundamentals</div>
+        <div class="cert-org">Google — Coursera</div>
+        <div class="cert-year">2024</div>
+      </div>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Cybersecurity Essentials</div>
+        <div class="cert-org">Coursera</div>
+        <div class="cert-year">2023</div>
+      </div>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Database Management</div>
+        <div class="cert-org">IBM — Coursera</div>
+        <div class="cert-year">2023</div>
+      </div>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Cloud Computing Basics</div>
+        <div class="cert-org">Coursera</div>
+        <div class="cert-year">2023</div>
+      </div>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">UI/UX Design Fundamentals</div>
+        <div class="cert-org">Coursera</div>
+        <div class="cert-year">2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="fade-up" style="display:flex; justify-content:center;">
+      <div class="about-avatar">ZT</div>
+    </div>
+    <div class="about-text fade-up">
+      <div class="section-label">Men haqimda</div>
+      <h3>Toxirjonov Ziyodbek</h3>
+      <p>
+        Men Flutter dasturchiman. Toshkent axborot texnologiyalari universiteti
+        Farg'ona filialida Kompyuter injineringi yo'nalishida o'qidim.
+        Mobil ilovalar yaratish, muammolarni hal etish va yangi texnologiyalarni o'rganishdan zavqlanaman.
+        O'zbekiston Adliya Vazirligi tomonidan tasdiqlangan 7 ta dasturiy mahsulot muallifiman.
+      </p>
+      <div class="about-info">
+        <div class="info-item">
+          <div class="info-label">Tug'ilgan yil</div>
+          <div class="info-val">21 Oktyabr, 2004</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Joylashuv</div>
+          <div class="info-val">Farg'ona, O'zbekiston</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Ta'lim</div>
+          <div class="info-val">FDTU — Kompyuter Injineringi</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Holat</div>
+          <div class="info-val" style="color: var(--accent);">🎓 Bitiruvchi, 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label fade-up">Aloqa</div>
+  <h2 class="section-title fade-up">Bog'laning</h2>
+  <p class="section-sub fade-up">Loyiha, hamkorlik yoki savol bo'lsa — xabar qoldiring!</p>
+
+  <div class="contact-cards">
+    <a href="https://t.me/ziyodbek_t" class="contact-card fade-up" target="_blank">
+      <div class="contact-card-icon tg">✈️</div>
+      <div class="contact-card-info">
+        <div class="contact-card-type">Telegram</div>
+        <div class="contact-card-val">@ziyodbek_t</div>
+      </div>
+    </a>
+    <a href="mailto:tohirjonovziyodbek@gmail.com" class="contact-card fade-up">
+      <div class="contact-card-icon email">📧</div>
+      <div class="contact-card-info">
+        <div class="contact-card-type">Email</div>
+        <div class="contact-card-val">tohirjonovziyodbek@gmail.com</div>
+      </div>
+    </a>
+    <a href="tel:+998912024804" class="contact-card fade-up">
+      <div class="contact-card-icon phone">📱</div>
+      <div class="contact-card-info">
+        <div class="contact-card-type">Telefon</div>
+        <div class="contact-card-val">+998 91 202 48 04</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-text">© 2026 <span>Toxirjonov Ziyodbek</span>. Barcha huquqlar himoyalangan.</div>
+  <div class="footer-text">Flutter Developer & IT Specialist</div>
+</footer>
+
+<script>
+// Cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', (e) => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Nav active
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.background = window.scrollY > 50
+    ? 'rgba(10,10,15,0.95)'
+    : 'rgba(10,10,15,0.8)';
+});
+</script>
+</body>
+</html>
